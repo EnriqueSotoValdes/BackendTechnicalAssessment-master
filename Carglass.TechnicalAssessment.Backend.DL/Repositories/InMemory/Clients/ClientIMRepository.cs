@@ -25,25 +25,36 @@ public class ClientIMRepository : ICrudRepository<Client>
 
     public IEnumerable<Client> GetAll()
     {
-        // TODO Implement
-        throw new NotImplementedException();
+        return _clients.ToArray();
     }
 
     public Client? GetById(params object[] keyValues)
     {
         return _clients.SingleOrDefault(x => x.Id.Equals(keyValues[0]));
     }
+    public Client? GetByDocNum(params object[] keyValues)
+    {
+        return _clients.SingleOrDefault(x => x.DocNum.Equals(keyValues[0]));
+    }
 
     public void Create(Client item)
     {
-        // TODO Implement
-        throw new NotImplementedException();
+        _clients.Add(item);
     }
 
     public void Update(Client item)
     {
-        // TODO Implement
-        throw new NotImplementedException();
+        Client? client = _clients.SingleOrDefault(x => x.Id.Equals(item.Id));
+        if(client != null)
+        {
+            client.Id = item.Id;
+            client.DocType = item.DocType;
+            client.DocNum = item.DocNum;
+            client.Email = item.Email;
+            client.GivenName = item.GivenName;
+            client.FamilyName1 = item.FamilyName1;
+            client.Phone = item.Phone;
+        }
     }
 
     public void Delete(Client item)

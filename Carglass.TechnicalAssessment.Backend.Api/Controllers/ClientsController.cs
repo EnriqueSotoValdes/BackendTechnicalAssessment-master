@@ -18,35 +18,63 @@ public class ClientsController : ControllerBase
     [HttpGet]
     public IActionResult GetAll()
     {
-        // TODO Implement
-        throw new NotImplementedException();
+        return Ok(_clientAppService.GetAll());
     }
 
     [HttpGet]
     [Route("{id}")]
     public IActionResult GetById(int id)
     {
-        return Ok(_clientAppService.GetById(id));
+        try
+        {
+            var result = _clientAppService.GetById(id);
+            return Ok(result);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 
     [HttpPost]
     public IActionResult Create([FromBody] ClientDto dto)
     {
-        // TODO Implement
-        throw new NotImplementedException();
+        try
+        {
+            _clientAppService.Create(dto);
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 
     [HttpPut]
     public IActionResult Update([FromBody] ClientDto dto)
     {
-        _clientAppService.Update(dto);
-        return Ok();
+        try
+        {
+            _clientAppService.Update(dto);
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 
     [HttpDelete]
     public IActionResult Delete([FromBody] ClientDto dto)
     {
-        // TODO Implement
-        throw new NotImplementedException();
+        try
+        {
+            _clientAppService.Delete(dto);
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 }
