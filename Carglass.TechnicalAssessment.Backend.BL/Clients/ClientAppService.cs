@@ -8,77 +8,77 @@ namespace Carglass.TechnicalAssessment.Backend.BL;
 
 internal class ClientAppService : IClientAppService
 {
-    private readonly ICrudRepository<Client> _theData;
-    private readonly IMapper _magicalClassChanger;
-    private readonly IValidator<ClientDto> _allIsCorrectHere;
+    private readonly ICrudRepositoryExtension<Client> _data;
+    private readonly IMapper _mapper_Cient_ClientDto;
+    private readonly IValidator<ClientDto> _validator;
 
-    public ClientAppService( ICrudRepository<Client> theData, IMapper magicalClassChanger, IValidator<ClientDto> allIsCorrectHere)
+    public ClientAppService( ICrudRepositoryExtension<Client> data, IMapper mapper_Cient_ClientDto, IValidator<ClientDto> validator)
     {
-        _theData = theData;
-        _magicalClassChanger = magicalClassChanger;
-        _allIsCorrectHere = allIsCorrectHere;
+        _data = data;
+        _mapper_Cient_ClientDto = mapper_Cient_ClientDto;
+        _validator = validator;
     }
 
     public IEnumerable<ClientDto> GetAll()
     {
-        var moneySpenders = _theData.GetAll();
-        return _magicalClassChanger.Map<IEnumerable<ClientDto>>(moneySpenders);
+        var allClients = _data.GetAll();
+        return _mapper_Cient_ClientDto.Map<IEnumerable<ClientDto>>(allClients);
     }
 
     public ClientDto GetById(params object[] searchID)
     {
-        var theOne = _theData.GetById(searchID);
+        var foundElement = _data.GetById(searchID);
 
-        if (null == theOne)
+        if (null == foundElement)
         {
             throw new Exception("No existe ningún cliente con este Id");
         }
 
-        return _magicalClassChanger.Map<ClientDto>(theOne);
+        return _mapper_Cient_ClientDto.Map<ClientDto>(foundElement);
     }
 
     public void Create(ClientDto newItemClientDto)
     {
-        if ( null != _theData.GetById(newItemClientDto.Id) )
+        if ( null != _data.GetById(newItemClientDto.Id) )
         {
             throw new Exception("Ya existe un cliente con este Id");
         }
-        if ( null != _theData.GetByDocNum(newItemClientDto.DocNum) )
+        if ( null != _data.GetByDocNum(newItemClientDto.DocNum) )
         {
             throw new Exception("Ya existe un cliente con este DocNum");
         }
 
         ValidateDto(newItemClientDto);
 
-        _theData.Create(_magicalClassChanger.Map<Client>(newItemClientDto));
+        _data.Create(_mapper_Cient_ClientDto.Map<Client>(newItemClientDto));
     }
 
     public void Update(ClientDto itemClientDto)
     {
-        if (null == _theData.GetById(itemClientDto.Id))
+        if (null == _data.GetById(itemClientDto.Id))
         {
             throw new Exception("No existe ningún cliente con este Id");
         }
 
         ValidateDto(itemClientDto);
 
-        Client updateClient = _magicalClassChanger.Map<Client>(itemClientDto);
-        _theData.Update(updateClient);
+        Client updateClient = _mapper_Cient_ClientDto.Map<Client>(itemClientDto);
+        _data.Update(updateClient);
     }
 
     public void Delete(ClientDto removeClientDto)
     {
-        if (null == _theData.GetById(removeClientDto.Id))
+        if (null == _data.GetById(removeClientDto.Id))
         {
             throw new Exception("No existe ningún cliente con este Id");
         }
 
-        _theData.Delete(_magicalClassChanger.Map<Client>(removeClientDto));
+        _data.Delete(_mapper_Cient_ClientDto.Map<Client>(removeClientDto));
     }
 
     private void ValidateDto(ClientDto item)
     {
-        var validationResult = _allIsCorrectHere.Validate(item);
+        var validationResult = _validator.Validate(item);
         if (validationResult.Errors.Any())
         {
             string toShowErrors = string.Join("; ", validationResult.Errors.Select(s => s.ErrorMessage));

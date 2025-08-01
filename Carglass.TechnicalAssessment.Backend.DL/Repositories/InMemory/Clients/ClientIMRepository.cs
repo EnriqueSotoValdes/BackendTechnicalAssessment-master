@@ -2,7 +2,7 @@
 
 namespace Carglass.TechnicalAssessment.Backend.DL.Repositories;
 
-public class ClientIMRepository : ICrudRepository<Client>
+public class ClientIMRepository : ICrudRepositoryExtension<Client>
 {
     private ICollection<Client> _clients;
 

@@ -8,7 +8,7 @@ public class ClientDtoValidator : AbstractValidator<ClientDto>
     {
         RuleFor(x => x.Id)
             .NotEqual(default(int))
-            .WithMessage("El Id del producto es necesario.");
+            .WithMessage("El Id del cliente es necesario.");
 
         RuleFor(x => x.DocType)
             .NotEmpty()

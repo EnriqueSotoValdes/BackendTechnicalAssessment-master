@@ -14,5 +14,6 @@ public class Module : Autofac.Module
     private static void RegisterValidators(ContainerBuilder builder)
     {
         builder.RegisterType<ClientDtoValidator>().As<IValidator<ClientDto>>();
+        builder.RegisterType<ProductDtoValidator>().As<IValidator<ProductDto>>();
     }
 }
