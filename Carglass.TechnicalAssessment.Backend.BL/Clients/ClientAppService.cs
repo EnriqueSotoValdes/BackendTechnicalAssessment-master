@@ -25,9 +25,9 @@ internal class ClientAppService : IClientAppService
         return _magicalClassChanger.Map<IEnumerable<ClientDto>>(moneySpenders);
     }
 
-    public ClientDto GetById(params object[] keyValues)
+    public ClientDto GetById(params object[] searchID)
     {
-        var theOne = _theData.GetById(keyValues);
+        var theOne = _theData.GetById(searchID);
 
         if (null == theOne)
         {
@@ -37,48 +37,43 @@ internal class ClientAppService : IClientAppService
         return _magicalClassChanger.Map<ClientDto>(theOne);
     }
 
-    public void Create(ClientDto newMoney)
+    public void Create(ClientDto newItemClientDto)
     {
-        if ( null != _theData.GetById(newMoney.Id) )
+        if ( null != _theData.GetById(newItemClientDto.Id) )
         {
             throw new Exception("Ya existe un cliente con este Id");
         }
-        if ( null != _theData.GetByDocNum(newMoney.DocNum) )
+        if ( null != _theData.GetByDocNum(newItemClientDto.DocNum) )
         {
             throw new Exception("Ya existe un cliente con este DocNum");
         }
 
-        if( newMoney.DocType.ToLower().Equals( "nif"))
-        {
+        ValidateDto(newItemClientDto);
 
-        }
-
-        ValidateDto(newMoney);
-
-        _theData.Create(_magicalClassChanger.Map<Client>(newMoney));
+        _theData.Create(_magicalClassChanger.Map<Client>(newItemClientDto));
     }
 
-    public void Update(ClientDto aBitOfMakeup)
+    public void Update(ClientDto itemClientDto)
     {
-        if (null == _theData.GetById(aBitOfMakeup.Id))
+        if (null == _theData.GetById(itemClientDto.Id))
         {
             throw new Exception("No existe ningún cliente con este Id");
         }
 
-        ValidateDto(aBitOfMakeup);
+        ValidateDto(itemClientDto);
 
-        var entity = _magicalClassChanger.Map<Client>(aBitOfMakeup);
-        _theData.Update(entity);
+        Client updateClient = _magicalClassChanger.Map<Client>(itemClientDto);
+        _theData.Update(updateClient);
     }
 
-    public void Delete(ClientDto byebyee)
+    public void Delete(ClientDto removeClientDto)
     {
-        if (null == _theData.GetById(byebyee.Id))
+        if (null == _theData.GetById(removeClientDto.Id))
         {
             throw new Exception("No existe ningún cliente con este Id");
         }
 
-        _theData.Delete(_magicalClassChanger.Map<Client>(byebyee));
+        _theData.Delete(_magicalClassChanger.Map<Client>(removeClientDto));
     }
 
     private void ValidateDto(ClientDto item)
