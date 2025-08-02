@@ -55,4 +55,18 @@ public class ProductIMRepository : ICrudRepository<Product>
 
         _products.Remove(toDeleteItem);
     }
+
+    public void Reset()
+    {
+        _products.Clear();
+        _products.Add(new Product()
+        {
+            Id = 1,
+            productName = "Lapiz",
+            productType = 10,
+            numTerminal = 1001233123,
+            soldAt = "2019-01-09 14:26:17"
+        });
+        
+    }
 }

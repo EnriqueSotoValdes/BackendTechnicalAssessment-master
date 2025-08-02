@@ -8,4 +8,5 @@ public interface ICrudRepository<TEntity>
     void Create(TEntity item);
     void Update(TEntity item);
     void Delete(TEntity item);
+    void Reset();
 }

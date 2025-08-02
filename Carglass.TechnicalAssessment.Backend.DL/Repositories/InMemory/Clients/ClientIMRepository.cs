@@ -63,4 +63,19 @@ public class ClientIMRepository : ICrudRepositoryExtension<Client>
 
         _clients.Remove(toDeleteItem);
     }
+
+    public void Reset()
+    {
+        _clients.Clear();
+        _clients.Add(new Client()
+        {
+            Id = 1,
+            DocType = "nif",
+            DocNum = "11223344E",
+            Email = "eromani@sample.com",
+            GivenName = "Enriqueta",
+            FamilyName1 = "Romani",
+            Phone = "668668668"
+        });
+    }
 }
