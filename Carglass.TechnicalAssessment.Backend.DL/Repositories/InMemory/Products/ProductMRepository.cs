@@ -13,10 +13,10 @@ public class ProductIMRepository : ICrudRepository<Product>
             new Product()
             {
                 Id = 1,
-                productName = "Lapiz",
-                productType = 10,
-                numTerminal = 1001233123,
-                soldAt = "2019-01-09 14:26:17"
+                ProductName = "Lapiz",
+                ProductType = 10,
+                NumTerminal = 1001233123,
+                SoldAt = "2019-01-09 14:26:17"
             }
         };
     }
@@ -42,10 +42,10 @@ public class ProductIMRepository : ICrudRepository<Product>
         if(product != null)
         {
             product.Id = item.Id;
-            product.productName = item.productName;
-            product.productType = item.productType; 
-            product.numTerminal = item.numTerminal;
-            product.soldAt = item.soldAt;
+            product.ProductName = item.ProductName;
+            product.ProductType = item.ProductType; 
+            product.NumTerminal = item.NumTerminal;
+            product.SoldAt = item.SoldAt;
         }
     }
 
@@ -62,10 +62,10 @@ public class ProductIMRepository : ICrudRepository<Product>
         _products.Add(new Product()
         {
             Id = 1,
-            productName = "Lapiz",
-            productType = 10,
-            numTerminal = 1001233123,
-            soldAt = "2019-01-09 14:26:17"
+            ProductName = "Lapiz",
+            ProductType = 10,
+            NumTerminal = 1001233123,
+            SoldAt = "2019-01-09 14:26:17"
         });
         
     }

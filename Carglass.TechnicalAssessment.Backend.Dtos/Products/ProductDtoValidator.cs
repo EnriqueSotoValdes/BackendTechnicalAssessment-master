@@ -10,7 +10,7 @@ public class ProductDtoValidator : AbstractValidator<ProductDto>
             .NotEqual(default(int))
             .WithMessage("El Id del producto es necesario.");
 
-        RuleFor(x => x.productName)
+        RuleFor(x => x.ProductName)
             .NotEmpty()
             .WithMessage("El nombre del producto es necesario.");
 

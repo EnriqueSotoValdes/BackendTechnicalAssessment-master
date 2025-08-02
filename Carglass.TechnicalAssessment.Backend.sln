@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Carglass.TechnicalAssessmen
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Carglass.TechnicalAssessment.Backend.Entities", "Carglass.TechnicalAssessment.Backend.Entities\Carglass.TechnicalAssessment.Backend.Entities.csproj", "{6744C5CB-3732-4241-9014-3AE131AE544D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carglass.TechnicalAssement.Backend.Test", "Carglass.TechnicalAssement.Backend.Test\Carglass.TechnicalAssement.Backend.Test.csproj", "{BEF3C626-A55A-46D8-BBDA-CD71939DE227}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carglass.TechnicalAssessment.Backend.Test", "Carglass.TechnicalAssement.Backend.Test\Carglass.TechnicalAssessment.Backend.Test.csproj", "{BEF3C626-A55A-46D8-BBDA-CD71939DE227}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

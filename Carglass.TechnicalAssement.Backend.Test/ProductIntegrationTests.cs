@@ -136,7 +136,7 @@ public class ProductIntegrationTests : IClassFixture<WebApplicationFactory<Progr
         var product = products.Find( element =>  element.Id == newModifiedProduct.id );
 
         Assert.NotNull(product);
-        Assert.True(product.productType == newModifiedProduct.productType && product.productType != newProduct.productType);
+        Assert.True(product.ProductType == newModifiedProduct.productType && product.ProductType != newProduct.productType);
 
         var repository = _factory.Services.GetRequiredService<ICrudRepository<Product>>();
         repository.Reset();
