@@ -9,8 +9,16 @@ builder.Services.AddControllers();
 builder.Services
     .AddEndpointsApiExplorer()
     .AddSwaggerGen()
-    .AddAutoMapper(typeof(Carglass.TechnicalAssessment.Backend.BL.Module).Assembly);
-
+    .AddAutoMapper(typeof(Carglass.TechnicalAssessment.Backend.BL.Module).Assembly)
+    .AddCors(options =>
+     {
+         options.AddPolicy("AllowAll", policy =>
+         {
+             policy.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+         });
+     });
 // Use and configure Autofac
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
@@ -28,6 +36,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger()
        .UseSwaggerUI();
+    app.UseCors("AllowAll");
 }
 
 app.UseHttpsRedirection()
